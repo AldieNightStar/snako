@@ -4,6 +4,7 @@ require 'snake'
 require 'once'
 require 'apple'
 require 'inputs'
+require 'bounds'
 
 function love.load()
     -- Events for control
@@ -85,15 +86,25 @@ function love.load()
 
     -- Game over state
     isGameOver = false
+
+    -- Bounds
+    gameBounds = bounds(1, 1, 32, 32)
 end
 
 function love.draw()
+    -- Draw bounds
+    gameBounds:draw()
+
+    -- Draw the snake whatever happens
     snake:draw()
-    drawApple()
     -- Draw text if Game Over state
     if isGameOver then
-        love.graphics.scale(2, 2)
+        love.graphics.setNewFont(64)
+        love.graphics.setColor(1, 1, 1)
         love.graphics.print("Game Over", 0, 0)
+    else
+        -- if NOT GAME OVER state
+        drawApple()
     end
 end
 
@@ -110,7 +121,7 @@ function love.update()
             end
             -- Check that Snake is colliding or not
             -- If collide then we stop the game, saying "Game over" TODO
-            if snake:collideSelf() then
+            if snake:collideSelf() or not gameBounds:inside(unpack(snake:pos())) then
                 gameOver:emit()
             end
         end

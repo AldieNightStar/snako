@@ -1,7 +1,7 @@
 function appleRandom()
     applepos = {
-        love.math.random(0, 20),
-        love.math.random(0, 20)
+        love.math.random(3, 30),
+        love.math.random(3, 30)
     }
 end
 
