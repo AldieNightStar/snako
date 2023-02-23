@@ -37,7 +37,19 @@ function Snake:draw()
     end
 end
 
-function snake(x, y)
+function Snake:collideSelf()
+    local pos = self:pos()
+    for id, p in ipairs(self.arr) do
+        if id == #self.arr then goto _end end
+        if p[1] == pos[1] and p[2] == pos[2] then
+            return true
+        end
+        ::_end::
+    end
+    return false
+end
+
+function newSnake(x, y)
     return setmetatable({
         arr={{x, y}},
         -- Used to indicate that snake will grow
