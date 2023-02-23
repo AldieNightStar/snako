@@ -7,7 +7,7 @@ function Snake:move()
     -- if 'grow' > 0 then no tail removal
 
     -- Let's find postion by the last element
-    local lastPos = self.arr[#self.arr]
+    local lastPos = self:pos()
 
     -- Add new cell to relative to direction position
     table.insert(self.arr, {lastPos[1]+self.dir[1], lastPos[2]+self.dir[2]})
@@ -18,6 +18,10 @@ function Snake:move()
     else
         self.grow = self.grow - 1
     end
+end
+
+function Snake:pos()
+    return self.arr[#self.arr]
 end
 
 function Snake:draw()
