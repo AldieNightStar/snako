@@ -4,7 +4,7 @@ local Smt = {__index=Snake}
 function Snake:move()
     -- We adding new to head
     -- And remove one from tail
-    -- if 'toGrow' is true then no tail removal
+    -- if 'grow' > 0 then no tail removal
 
     -- Let's find postion by the last element
     local lastPos = self.arr[#self.arr]
@@ -13,10 +13,10 @@ function Snake:move()
     table.insert(self.arr, {lastPos[1]+self.dir[1], lastPos[2]+self.dir[2]})
     -- If not growing then remove first one cell
     -- If growing then don't remove the cell just turn growing off
-    if not self.isGrow then
+    if self.grow < 1 then
         table.remove(self.arr, 1) -- remove tail
     else
-        self.isGrow = false
+        self.grow = self.grow - 1
     end
 end
 
@@ -31,8 +31,8 @@ function snake(x, y)
     return setmetatable({
         arr={{x, y}},
         -- Used to indicate that snake will grow
-        -- Inital value is true to make snake 2 cells
-        toGrow = true,
+        -- Inital value is true to make snake 5 cells
+        grow = 5,
         -- Direction x, y
         -- used to make snake self move
         dir = {1, 0},

@@ -13,7 +13,7 @@ function love.load()
     score = event()
     -- Data for the snake
     snake = snake(10, 10)
-    gameSpeed = 4
+    gameSpeed = 24
     -- Timing
     gameOnce = once()
     -- Init joystick mapping
