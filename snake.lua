@@ -26,8 +26,14 @@ end
 
 function Snake:draw()
     -- We will go with each cell and draw the tile
-    for _, pos in ipairs(self.arr) do
-        gfx.drawTile(pos[1], pos[2])
+    for id, pos in ipairs(self.arr) do
+        if id == #self.arr then
+            gfx.drawTile(pos[1], pos[2], {.2, .1, .1})
+        else
+            local blue  = (id%10)/10
+            local green = (id%25)/25 
+            gfx.drawTile(pos[1], pos[2], {.1, green, blue})
+        end
     end
 end
 

@@ -48,8 +48,11 @@ function love.load()
 
     -- Connect score controls to the snake
     score:connect(function(name)
-        -- When it's an apple then we random that apple
-        if name == 'apple' then appleRandom() end
+        -- When it's an apple then we random that apple and grow the snake
+        if name == 'apple' then
+            appleRandom()
+            snake.grow = snake.grow + 1
+        end
 
         return true
     end)
@@ -59,8 +62,8 @@ function love.load()
 end
 
 function love.draw()
-    drawApple()
     snake:draw()
+    drawApple()
 end
 
 function love.update()
@@ -70,7 +73,6 @@ function love.update()
         -- Then we add to grow + 1
         -- and also reroll the apple pos
         if isApple() then
-            snake.grow = snake.grow + 1
             score:emit('apple')
         end
     end
