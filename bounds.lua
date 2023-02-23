@@ -2,10 +2,10 @@ local Bounds = {}
 local Bmt = { __index = Bounds }
 
 function Bounds:inside(x, y)
-    if x < self.x then return false end
-    if y < self.y then return false end
-    if x > self.x + self.w then return false end
-    if y > self.y + self.h then return false end
+    if x <= self.x then return false end
+    if y <= self.y then return false end
+    if x >= self.x + self.w then return false end
+    if y >= self.y + self.h then return false end
     return true
 end
 
