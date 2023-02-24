@@ -8,6 +8,8 @@ require 'bounds'
 require 'snake_control'
 
 function love.load()
+    -- Window settings
+    love.window.setMode(700, 700)
     -- Call game to be init
     initGame()
 end
@@ -66,14 +68,14 @@ function initGame()
         return true
     end)
 
-    -- Load the Apple position
-    appleRandom()
-
     -- Game over state
     isGameOver = false
 
     -- Bounds
     gameBounds = bounds(1, 1, 32, 32)
+
+    -- Load the Apple position
+    appleRandom()
 end
 
 function love.draw()

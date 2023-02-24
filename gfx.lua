@@ -1,4 +1,4 @@
-gfx = {tileSize=18}
+gfx = {tileSize=20}
 
 local function modColor(color)
     return {color[1]*1.5, color[2]*1.5, color[3]*1.5}
