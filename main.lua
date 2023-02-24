@@ -80,7 +80,7 @@ function love.draw()
     if isGameOver then
         love.graphics.setNewFont(64)
         love.graphics.setColor(1, 1, 1)
-        love.graphics.print("Game Over", 0, 0)
+        love.graphics.print("Game Over (push 'a')", 0, 0)
     else
         -- Get snake pos for future use
         local snakepos = snake:pos()
