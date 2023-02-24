@@ -5,6 +5,7 @@ require 'once'
 require 'apple'
 require 'inputs'
 require 'bounds'
+require 'snake_control'
 
 function love.load()
     -- Events for control
@@ -34,31 +35,9 @@ function love.load()
         b="b",
         start="spec"
     }
-    -- Connect controls to the snake
-    -- We are using events
-    control:connect(function(k)
-        -- If game is not under GameOver state
-        if not isGameOver then
-            -- Here we are mapping directional control
-            if k == 'up' then
-                snake.dir = {0, -1}
-            elseif k == 'down' then
-                snake.dir = {0, 1}
-            elseif k == 'left' then
-                snake.dir = {-1, 0}
-            elseif k == 'right' then
-                snake.dir = {1, 0}
-            end
-        else
-            -- GAME OVER state
-            if k == 'a' then
-                -- This will completely reset the game
-                love.load()
-            end
-        end
-        -- Return true to survive
-        return true
-    end)
+
+    -- Load snake control
+    initControlFor(control)
 
     -- Connect score controls to the snake
     score:connect(function(name)
