@@ -103,8 +103,14 @@ function love.draw()
         love.graphics.setColor(1, 1, 1)
         love.graphics.print("Game Over", 0, 0)
     else
+        -- Get snake pos for future use
+        local snakepos = snake:pos()
         -- if NOT GAME OVER state
         drawApple()
+        -- Draw cross liens for head of the snake
+        local colorLine = {1, 1, 1, .1}
+        gfx.centerTileLine(gameBounds.x, snakepos[2], gameBounds.x + gameBounds.w, snakepos[2], colorLine) -- horizontal line
+        gfx.centerTileLine(snakepos[1], gameBounds.y, snakepos[1], gameBounds.y + gameBounds.h, colorLine) -- vertical line
     end
 end
 
