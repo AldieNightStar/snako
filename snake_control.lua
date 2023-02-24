@@ -5,6 +5,13 @@ local directionProtect = {
     right = {"up", "down"},
 }
 
+local directionNameToPos = {
+    left = {-1, 0},
+    right = {1, 0},
+    up = {0, -1},
+    down = {0, 1}
+}
+
 -- Checks is it ok to go that wey
 -- Will protect snake from suicide
 -- d1, d2 is a string values of 'left', 'right', 'up', 'down'
@@ -33,22 +40,36 @@ local function parseDirection(vec)
     else return 'right' end -- this is default value
 end
 
+-- Gets two positions, {1, 0} like objects and return direction (for ex: 'left') to say direction to it
+local function relativeDirection(pos1, pos2)
+    local p = {pos2[1] - pos1[1], pos2[2] - pos1[2]}
+    return parseDirection(p)
+end
+
 function initControlFor(controlEvent)
     -- Connect controls to the snake
     -- We are using events
     controlEvent:connect(function(k)
         -- If game is not under GameOver state
         if not isGameOver then
-            local oldDirection = parseDirection(snake.dir)
+            local snakeDirection = parseDirection(snake.dir)
             -- Here we are mapping directional control
-            if k == 'up' and isAllowToDirect(oldDirection, 'up') then
+            if k == 'up' and isAllowToDirect(snakeDirection, 'up') then
                 snake.dir = {0, -1}
-            elseif k == 'down' and isAllowToDirect(oldDirection, 'down') then
+            elseif k == 'down' and isAllowToDirect(snakeDirection, 'down') then
                 snake.dir = {0, 1}
-            elseif k == 'left' and isAllowToDirect(oldDirection, 'left') then
+            elseif k == 'left' and isAllowToDirect(snakeDirection, 'left') then
                 snake.dir = {-1, 0}
-            elseif k == 'right' and isAllowToDirect(oldDirection, 'right') then
+            elseif k == 'right' and isAllowToDirect(snakeDirection, 'right') then
                 snake.dir = {1, 0}
+            elseif k == 'a' then
+                -- Autosnake feature
+                -- When 'a' is pressed and snake feels an apple then it turns to it automatically
+                local newdir = relativeDirection(snake:pos(), applepos)
+                if newdir ~= nil and isAllowToDirect(snakeDirection, newdir) then
+                    snake.dir = directionNameToPos[newdir]
+                end
+
             end
         else
             -- GAME OVER state
