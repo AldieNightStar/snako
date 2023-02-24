@@ -17,6 +17,6 @@ function Event:clear()
     self.arr = {}
 end
 
-function event()
+function newEvent()
     return setmetatable({arr={}}, Emt) 
 end

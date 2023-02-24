@@ -8,17 +8,23 @@ require 'bounds'
 require 'snake_control'
 
 function love.load()
+    -- Call game to be init
+    initGame()
+end
+
+function initGame()
+    
     -- Events for control
     -- Takes string of keys pressed (look at joymap)
-    control = event()
+    control = newEvent()
     -- Events for score gaining
     -- Takes string 'name' when bonus taken
     -- For example it could be an 'apple'
-    score = event()
+    score = newEvent()
 
     -- Event for game over stuff
     -- When snake dies it emits without any parameters
-    gameOver = event()
+    gameOver = newEvent()
 
     -- Data for the snake
     snake = newSnake(10, 10)

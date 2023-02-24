@@ -54,7 +54,7 @@ function initControlFor(controlEvent)
             -- GAME OVER state
             if k == 'a' then
                 -- This will completely reset the game
-                love.load()
+                initGame()
             end
         end
         -- Return true to survive
